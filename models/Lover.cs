@@ -1,8 +1,9 @@
 using System;
+using System.ComponentModel.DataAnnotations;
 
-namespace LoveFinderz.models
+namespace LoveFinderz.Models
 {
-    public class LoveFinderz
+    public class Lover
     {
 
         [Key]

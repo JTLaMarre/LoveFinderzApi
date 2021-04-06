@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using LoveFinderz.Storing;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -20,18 +21,29 @@ namespace LoveFinderzApi
         {
             Configuration = configuration;
         }
+        
 
         public IConfiguration Configuration { get; }
+        readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
+            services.AddDbContext<LoveFinderzContext>();
+            services.AddScoped<LoveFinderzRepository>();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "LoveFinderzApi", Version = "v1" });
             });
+                 services.AddCors(options =>
+       {
+           options.AddPolicy(name: MyAllowSpecificOrigins,
+                             builder =>
+                             {
+                                 builder.WithOrigins("http://localhost:4200").AllowAnyHeader().AllowAnyMethod();
+                             });
+       });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -49,6 +61,9 @@ namespace LoveFinderzApi
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseCors(MyAllowSpecificOrigins);
+
 
             app.UseEndpoints(endpoints =>
             {
