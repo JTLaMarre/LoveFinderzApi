@@ -11,10 +11,13 @@ namespace LoveFinderz.Models
 
         public string LoverName{get;set;}
 
+        public string Password{get;set;}
+
         public string Bio{get;set;}
 
         public string Sex{get;set;}
 
+        public DateTime lastLoved {get;set;}
 
 
     }
