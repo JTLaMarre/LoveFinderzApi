@@ -45,11 +45,10 @@ namespace LoveFinderz.Storing
         public void UpdateLovers(string UserName, string Lover)
         {
             var User = GetLover(UserName);
-            var NewLove = GetLover(Lover);
-            if(NewLove!=null){
+            
             User.lastLoved=DateTime.Now;
-            User.LoverName=NewLove.UserName;
-            }
+            User.LoverName=Lover;
+            
             _ctx.SaveChanges();
         }
         public void SexBio(string UserName,string Sex,string Bio)
