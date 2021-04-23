@@ -41,7 +41,7 @@ namespace LoveFinderzApi
            options.AddPolicy(name: MyAllowSpecificOrigins,
                              builder =>
                              {
-                                 builder.WithOrigins("http://localhost:4200").AllowAnyHeader().AllowAnyMethod();
+                                 builder.WithOrigins("https://lovefinderzzz.herokuapp.com/").AllowAnyHeader().AllowAnyMethod();
                              });
        });
         }
